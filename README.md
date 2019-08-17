@@ -1,14 +1,10 @@
-/*
-//////
-git clone https://github.com/JinFree/ncnn
-cd ncnn
-./install.sh
-Download in firefox below 2 links to ncnn/build/example
-    // param : https://drive.google.com/open?id=1V9oKHP6G6XvXZqhZbzNKL6FI_clRWdC-
-    // bin : https://drive.google.com/open?id=1DBcuFCr-856z3FRQznWL_S5h-Aj3RawA
-./yolov3_video ~/OpenCV_in_Ubuntu/Data/Lane_Detection_Videos/challenge.mp4 
-//////
-*/
+#git clone https://github.com/JinFree/ncnn
+#cd ncnn
+#./install.sh
+#Download in firefox below 2 links to ncnn/build/example
+#    // param : https://drive.google.com/open?id=1V9oKHP6G6XvXZqhZbzNKL6FI_clRWdC-
+#    // bin : https://drive.google.com/open?id=1DBcuFCr-856z3FRQznWL_S5h-Aj3RawA
+#./yolov3_video ~/OpenCV_in_Ubuntu/Data/Lane_Detection_Videos/challenge.mp4 
 
 ![](https://raw.githubusercontent.com/Tencent/ncnn/master/images/256-ncnn.png)
 # ncnn
