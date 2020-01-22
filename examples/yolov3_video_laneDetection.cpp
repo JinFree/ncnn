@@ -24,6 +24,7 @@
 #include "gpu.h"
 #endif // NCNN_VULKAN
 #include "LaneDetection.h"
+ncnn::Net yolov3;
 struct Object
 {
     cv::Rect_<float> rect;
@@ -33,17 +34,13 @@ struct Object
 
 static int detect_yolov3(const cv::Mat& bgr, std::vector<Object>& objects)
 {
-    ncnn::Net yolov3;
 
-#if NCNN_VULKAN
-    yolov3.opt.use_vulkan_compute = true;
-#endif // NCNN_VULKAN
-
+    ncnn::Extractor ex = yolov3.create_extractor();
+    ex.set_num_threads(4);
     // original pretrained model from https://github.com/eric612/MobileNet-YOLO
     // param : https://drive.google.com/open?id=1V9oKHP6G6XvXZqhZbzNKL6FI_clRWdC-
     // bin : https://drive.google.com/open?id=1DBcuFCr-856z3FRQznWL_S5h-Aj3RawA
-    yolov3.load_param("mobilenetv2_yolov3.param");
-    yolov3.load_model("mobilenetv2_yolov3.bin");
+    
 
     const int target_size = 352;
 
@@ -56,15 +53,13 @@ static int detect_yolov3(const cv::Mat& bgr, std::vector<Object>& objects)
     const float norm_vals[3] = {0.007843f, 0.007843f, 0.007843f};
     in.substract_mean_normalize(mean_vals, norm_vals);
 
-    ncnn::Extractor ex = yolov3.create_extractor();
-    ex.set_num_threads(4);
+    
 
     ex.input("data", in);
 
     ncnn::Mat out;
     ex.extract("detection_out", out);
 
-//     printf("%d %d %d\n", out.w, out.h, out.c);
     objects.clear();
     for (int i=0; i<out.h; i++)
     {
@@ -172,6 +167,8 @@ int main(int argc, char** argv)
         printf("Program Abort\n");
         exit(-1);
     }
+    yolov3.load_param("mobilenetv2_yolov3.param");
+    yolov3.load_model("mobilenetv2_yolov3.bin");
     std::string savePath = "output.mp4";
     int fps = cap.get(cv::CAP_PROP_FPS);
     int width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
