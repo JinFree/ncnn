@@ -30,6 +30,9 @@ target_link_libraries(yolov3 ${NCNN_EXAMPLE_LINK_LIBRARIES})
 add_executable(yolov3_video yolov3_video.cpp)
 target_link_libraries(yolov3_video ${NCNN_EXAMPLE_LINK_LIBRARIES})
 
+add_executable(yolov3_video_laneDetection yolov3_video_laneDetection.cpp)
+target_link_libraries(yolov3_video_laneDetection ${NCNN_EXAMPLE_LINK_LIBRARIES})
+
 add_executable(mobilenetv2ssdlite mobilenetv2ssdlite.cpp)
 target_link_libraries(mobilenetv2ssdlite ${NCNN_EXAMPLE_LINK_LIBRARIES})
 
